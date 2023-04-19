@@ -15,7 +15,11 @@ const useFetchData = () => {
         const response = await fetch(API_URL, {
           signal: abortController.signal,
         });
+
         const json = await response.json();
+        // const copy = JSON.parse(JSON.stringify(json));
+        // const aux = Object.keys(copy);
+        // console.log("aux", aux);
         setData(json);
       } catch (error) {
         setError(error);
@@ -31,4 +35,5 @@ const useFetchData = () => {
   }, []);
   return { data, error, loading };
 };
+
 export default useFetchData;
