@@ -1,35 +1,31 @@
-import { useFetchBreeds } from "../hooks/useFetchBreeds";
-import { Box } from "@mui/system";
-import { Card, CardMedia, Typography } from "@mui/material";
-
+// component created with material UI
 export const BreedGrid = ({ category }) => {
-  const { images, isLoading } = useFetchBreeds(category);
+  // const { images, isLoading } = useFetchData(category);
 
   return (
-    <Box sx={{}}>
-      <Card
-        sx={{
-          maxWidth: 345,
-          m: 1,
-          p: 4,
-          border: 2,
-          boxShadow: 5,
-          borderRight: 10,
-          borderBottom: 10,
-          borderBottomRightRadius: 15,
-          borderTopRightRadius: 15,
-          borderBottomLeftRadius: 15,
-          borderTopLeftRadius: 15,
-        }}
-      >
-        <CardMedia
-          component="img"
-          height="auto"
-          image={dataBreed}
-          alt={dataBreed}
-        />
-      </Card>
-    </Box>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+      {isLoading
+        ? "Loading..."
+        : images.map((imageUrl, index) => (
+            <div
+              key={`image-${index}`}
+              style={{
+                maxWidth: "345px",
+                margin: "1px",
+                padding: "4px",
+                border: "2px solid black",
+                boxShadow: "5px 5px black",
+                borderRight: "10px solid black",
+                borderBottom: "10px solid black",
+                borderBottomRightRadius: "15px",
+                borderTopRightRadius: "15px",
+                borderBottomLeftRadius: "15px",
+                borderTopLeftRadius: "15px",
+              }}
+            >
+              <img src={imageUrl} width="100%" alt={`Breed ${index + 1}`} />
+            </div>
+          ))}
+    </div>
   );
 };
-

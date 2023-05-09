@@ -1,33 +1,27 @@
-import * as React from "react";
-import { Card, CardMedia, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-
 const OneImage = ({ dataBreed }) => {
   return (
-    <Box sx={{}}>
-      <Card
-        sx={{
-          maxWidth: 345,
-          m: 1,
-          p: 4,
-          border: 2,
-          boxShadow: 5,
-          borderRight: 10,
-          borderBottom: 10,
-          borderBottomRightRadius: 15,
-          borderTopRightRadius: 15,
-          borderBottomLeftRadius: 15,
-          borderTopLeftRadius: 15,
-        }}
-      >
-        <CardMedia
-          component="img"
-          height="auto"
-          image={dataBreed}
-          alt={dataBreed}
-        />
-      </Card>
-    </Box>
+    <div
+      style={{
+        maxWidth: "345px",
+        margin: "1px",
+        padding: "4px",
+        border: "2px solid black",
+        boxShadow: "5px 5px black",
+        borderRight: "10px solid black",
+        borderBottom: "10px solid black",
+        borderBottomRightRadius: "15px",
+        borderTopRightRadius: "15px",
+        borderBottomLeftRadius: "15px",
+        borderTopLeftRadius: "15px",
+      }}
+    >
+      <img
+        src={dataBreed}
+        height="auto"
+        alt={dataBreed}
+        style={{ width: "100%" }}
+      />
+    </div>
   );
 };
 
