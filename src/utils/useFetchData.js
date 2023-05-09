@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const API_URL = "https://dog.ceo/api/breeds/list/all";
 
@@ -7,33 +7,42 @@ const useFetchData = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchData = async () => {
     const abortController = new AbortController();
-
-    const fetchData = async () => {
-      try {
-        const response = await fetch(API_URL, {
-          signal: abortController.signal,
-        });
-
-        const json = await response.json();
-        // const copy = JSON.parse(JSON.stringify(json));
-        // const aux = Object.keys(copy);
-        // console.log("aux", aux);
-        setData(json);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
+    try {
+      const response = await fetch(API_URL, {
+        signal: abortController.signal,
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    };
-    fetchData();
 
+      const json = await response?.json();
+      const copy = JSON.parse(JSON.stringify(json.message));
+      const aux = Object.keys(copy);
+      console.log("🚀 ~ file: useFetchData.js:23 ~ fetchData ~ aux:", aux);
+
+      setData(aux);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
     return () => {
       abortController.abort();
     };
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
-  return { data, error, loading };
+
+  const memoizedValue = useMemo(
+    () => ({ data, error, loading }),
+    [data, error, loading]
+  );
+
+  return memoizedValue;
 };
 
 export default useFetchData;
