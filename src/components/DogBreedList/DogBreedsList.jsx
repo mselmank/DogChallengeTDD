@@ -3,7 +3,6 @@ import useFetchData from "../../utils/useFetchData";
 
 const DogBreedsList = () => {
   const { data, error, loading } = useFetchData();
-  console.log("🚀 ~ file: DogBreedsList.jsx:6 ~ DogBreedsList ~ data:", data);
 
   if (loading) {
     return <p>Cargando...</p>;
@@ -14,6 +13,10 @@ const DogBreedsList = () => {
   }
 
   const breeds = Object.keys(data.message);
+  console.log(
+    "🚀 ~ file: DogBreedsList.jsx:16 ~ DogBreedsList ~ breeds:",
+    breeds
+  );
 
   return (
     <ul>

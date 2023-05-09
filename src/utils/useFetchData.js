@@ -20,7 +20,7 @@ const useFetchData = () => {
       const json = await response?.json();
       const copy = JSON.parse(JSON.stringify(json.message));
       const aux = Object.keys(copy);
-      console.log("🚀 ~ file: useFetchData.js:23 ~ fetchData ~ aux:", aux);
+      // console.log("🚀 ~ file: useFetchData.js:23 ~ fetchData ~ aux:", aux);
 
       setData(aux);
     } catch (error) {

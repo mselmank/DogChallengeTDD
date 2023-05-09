@@ -1,3 +1,5 @@
+import DogComponent from "../../assets/Icon";
+
 const styles = {
   navbar: {
     backgroundColor: "white",
@@ -13,7 +15,7 @@ export const MyNavbar = () => {
     <div style={styles.navbar}>
       <div style={{ maxWidth: "xl", margin: "0 auto" }}>
         <nav style={styles.toolbar}>
-          <a href="/">Icon</a>
+          <a href="/">{<DogComponent />}</a>
         </nav>
       </div>
     </div>
