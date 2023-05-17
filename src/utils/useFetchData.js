@@ -17,11 +17,10 @@ const useFetchData = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const json = await response?.json();
-      const copy = JSON.parse(JSON.stringify(json.message));
-      const aux = Object.keys(copy);
+      const json = await response.json();
+      const breeds = Object.keys(json.message);
 
-      setData(aux);
+      setData(breeds);
     } catch (error) {
       setError(error);
     } finally {

@@ -1,19 +1,21 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
+import useFetchData from "../../utils/useFetchData";
 
-const SelectBreed = ({ breeds }) => {
+const SelectBreed = () => {
   const [selectedBreed, setSelectedBreed] = useState("");
+  const { data, error, loading } = useFetchData();
 
   const handleSelectChange = (event) => {
     setSelectedBreed(event.target.value);
   };
 
-  const options = useMemo(() => {
-    return breeds.map((breed) => (
-      <option key={breed} value={breed}>
-        {breed}
-      </option>
-    ));
-  }, [breeds]);
+  if (loading) {
+    return <p>Cargando...</p>;
+  }
+
+  if (error) {
+    return <p>Hubo un error al obtener los datos</p>;
+  }
 
   return (
     <div>
@@ -24,11 +26,14 @@ const SelectBreed = ({ breeds }) => {
         onChange={handleSelectChange}
       >
         <option value="">Select a breed</option>
-        {options}
+        {data.map((breed) => (
+          <option key={breed} value={breed}>
+            {breed}
+          </option>
+        ))}
       </select>
     </div>
   );
 };
-// <SelectBreed breeds={breeds} />;
 
 export default SelectBreed;
