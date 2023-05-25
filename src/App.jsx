@@ -10,20 +10,18 @@ import useFetchDataByBreed from "./utils/useFetchDataByBreed";
 function App() {
   const [inputBreed, setInputBreed] = useState("");
   const [showError, setShowError] = useState(false);
-  const [allBreeds, setAllBreeds] = useState([]);
+  const [breeds, setBreeds] = useState([]);
   const { data, error, loading } = useFetchData();
-  // console.log("🚀 ~ file: App.jsx:12 ~ App ~ data:", data);
-  const { images, errorImages, loadingImages } =
-    useFetchDataByBreed(inputBreed);
-  console.log("🚀 ~ file: App.jsx:17 ~ App ~ images:", images);
+  const [subBreeds, setSubBreeds] = useState([]);
+  const { images, errorImages, loadingImages } = useFetchDataByBreed("boxer");
+  const [allBreeds, setAllBreeds] = useState(data);
 
-  // Mantengo la lista de razas con useMemo.
+  console.log("images", images);
 
   const HandleChange = (inputBreed) => {
     if (allBreeds.includes(inputBreed.toLocaleLowerCase())) {
       setInputBreed(inputBreed.toLocaleLowerCase());
-      dataFetch(inputBreed.toLocaleLowerCase());
-      setShowSubBreeds(true);
+      setBreeds(images);
     } else {
       setInputBreed("");
       setShowError(true);
@@ -48,6 +46,15 @@ function App() {
   if (error) {
     return <p>Hubo un error al obtener los datos</p>;
   }
+  const styles = {
+    container: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-evenly",
+      flexWrap: "wrap",
+    },
+  };
 
   return (
     <div data-testid="App">
@@ -64,7 +71,11 @@ function App() {
           <ErrorAlert />
         )}
       </div>
-      <div></div>
+      <div style={styles.container}>
+        {images.map((images, index) => {
+          return <OneImage imageUrl={images} key={index} />;
+        })}
+      </div>
     </div>
   );
 }

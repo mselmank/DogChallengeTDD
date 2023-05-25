@@ -1,4 +1,6 @@
-const OneImage = ({ dataBreed }) => {
+import React from "react";
+
+const OneImage = ({ imageUrl, index }) => {
   return (
     <div
       style={{
@@ -16,9 +18,10 @@ const OneImage = ({ dataBreed }) => {
       }}
     >
       <img
-        src={dataBreed}
+        key={index}
+        src={imageUrl}
         height="auto"
-        alt={dataBreed}
+        alt={imageUrl}
         style={{ width: "100%" }}
       />
     </div>

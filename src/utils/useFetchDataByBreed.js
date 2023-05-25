@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 
 const useFetchDataByBreed = (inputBreed) => {
-  const [data, setData] = useState(null);
+  const [images, setImages] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const dataFetch = async (inputBreed) => {
-    const url = `https://dog.ceo/api/breed/${inputBreed}/images`;
+    const url = `https://dog.ceo/api/breed/boxer/images`;
     try {
       const resp = await fetch(url);
       if (!resp.ok) {
         throw new Error(`HTTP error! status: ${resp.status}`);
       }
       const data = await resp.json();
-      setData(data.message);
+      setImages(data.message);
     } catch (error) {
       setError(error);
     } finally {
@@ -22,14 +22,10 @@ const useFetchDataByBreed = (inputBreed) => {
   };
 
   useEffect(() => {
-    dataFetch(inputBreed);
-  }, [inputBreed]);
+    dataFetch();
+  }, []);
 
-  return { data, error, loading };
-  console.log(
-    "🚀 ~ file: useFetchDataByBreed.js:29 ~ useFetchDataByBreed ~ data:",
-    data
-  );
+  return { images, error, loading };
 };
 
 export default useFetchDataByBreed;
